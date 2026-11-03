@@ -2,23 +2,24 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 針對摺疊設備與手機加入防縮放與安全區域設定 (適配 iPhone Duo 內外螢幕) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-   <!-- 新增：Facebook, LINE 等社群分享 Open Graph 標籤 -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="星果科技 | 星果科技估價單 - 二手手機回收價格">
-<meta property="og:description" content="全台大數據即時行情，保證無隱藏扣款。最高預估收購價馬上算！舊機貼換新機，享最高 NT$ 1,500 額外折扣。">
-<!-- 記得把副檔名改成 .jpg -->
-<meta property="og:image" content="https://starjb1.github.io/star/logo.jpg">
-<meta property="og:image:alt" content="星果科技 Logo">
+    <!-- 社群分享 Open Graph 標籤 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="星果科技 | 星果科技估價單 - 二手手機回收價格">
+    <meta property="og:description" content="全台大數據即時行情，保證無隱藏扣款。最高預估收購價馬上算！舊機貼換新機，享最高 NT$ 1,500 額外折扣。">
+    <!-- 記得把副檔名改成 .jpg -->
+    <meta property="og:image" content="https://starjb1.github.io/star/logo.jpg">
+    <meta property="og:image:alt" content="星果科技 Logo">
     
-    <!-- 新增：Twitter (X) 分享標籤 -->
+    <!-- Twitter (X) 分享標籤 -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="星果科技 | 星果科技估價單 - 二手手機回收價格">
+    <meta name="twitter:title" content="星果科技 | 3C智能估價大廳 - 二手手機即時回收價格">
     <meta name="twitter:description" content="全台大數據即時行情，保證無隱藏扣款。最高預估收購價馬上算！">
     <meta name="twitter:image" content="https://drive.google.com/uc?export=view&id=1G_jzXBXBhFLEbDKHms9T9unLU0AFPzPN">
 
-    <title>星果科技估價單 | 二手手機回收價格</title>
+    <title>3C智能估價大廳 | 二手手機即時回收價格</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -67,46 +68,47 @@
             100% { transform: scale(1); }
         }
         .price-animate { animation: pop 0.4s ease-out; }
+
+        /* 防止外螢幕導覽列擠壓 */
+        @media (max-width: 360px) {
+            .nav-actions { space-x: 0.5rem !important; }
+            .nav-actions a { font-size: 0.75rem !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased">
+<body class="text-slate-800 antialiased pb-safe">
 
-   <nav class="bg-white shadow-sm sticky top-0 z-50">
+   <nav class="bg-white shadow-sm sticky top-0 z-50 pt-safe">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3 cursor-pointer">
+                <div class="flex items-center gap-2 sm:gap-3 cursor-pointer">
                     <!-- 使用 GitHub 倉庫內的本地圖片 -->
-                    <img src="logo.jpg" alt="星果科技 Logo" class="h-10 w-auto object-contain rounded">
-                    <span class="font-bold text-xl tracking-tight text-dark hidden sm:block">星果科技<span class="text-primary">回收估價</span></span>
+                    <img src="logo.jpg" alt="星果科技 Logo" class="h-8 sm:h-10 w-auto object-contain rounded">
+                    <span class="font-bold text-lg sm:text-xl tracking-tight text-dark hidden sm:block">星果科技<span class="text-primary">回收估價</span></span>
                 </div>
-                <div class="flex items-center space-x-6">
-                    <!-- 移除 hidden，改為手機也能顯示、並支援換行或間距縮小 -->
-                    <div class="flex flex-wrap items-center space-x-4 md:space-x-8 text-sm md:text-base">
+                <div class="flex items-center space-x-3 sm:space-x-6 nav-actions">
+                    <div class="flex items-center space-x-3 md:space-x-8 text-xs sm:text-sm md:text-base">
                         <a href="#" class="text-primary font-medium border-b-2 border-primary py-2 md:py-5">線上估價</a>
                         <a href="#" onclick="openModal('process-modal')" class="text-slate-400 hover:text-primary transition-colors py-2 md:py-5">回收流程</a>
-                        <a href="#" onclick="openModal('faq-modal')" class="text-slate-400 hover:text-primary transition-colors py-2 md:py-5">常見問題</a>
+                        <a href="#" onclick="openModal('faq-modal')" class="text-slate-400 hover:text-primary transition-colors py-2 md:py-5 hidden sm:inline-block">常見問題</a>
                     </div>
-                    <!-- 快速開啟價格管理的按鈕 -->
-                    <button onclick="requestPassword()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-gear"></i> 調整回收價
-                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- 更新：改為動態輪播幻燈片 -->
-    <header class="relative h-[320px] md:h-[360px] overflow-hidden shadow-inner group bg-slate-900">
+    <!-- 頂部輪播幻燈片 -->
+    <header class="relative h-[240px] sm:h-[320px] md:h-[360px] overflow-hidden shadow-inner group bg-slate-900">
         <!-- 幻燈片 1 -->
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-700 flex flex-col justify-center items-center text-center p-4">
             <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDEwaDQwdjFIMHptMCAyMGg0MHYxSDB6TTEwIDB2NDBoLTFWMHptMjAgMHY0MGgtMVYweiIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIi8+PC9zdmc+')]"></div>
             <div class="relative z-10">
-                <h1 class="text-3xl md:text-5xl font-black mb-5 text-white tracking-tight drop-shadow-md">AI 智能估價，三分鐘掌握舊機價值</h1>
-                <p class="text-blue-100 text-lg max-w-2xl mx-auto mb-8 font-medium">同步全台大數據即時行情，保證無隱藏扣款。</p>
-                <div class="flex flex-wrap justify-center gap-5 text-sm font-bold text-white bg-white/10 w-fit mx-auto px-6 py-3 rounded-full backdrop-blur-sm border border-white/20 shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-2 text-lg"></i> 報價最透明</span>
-                    <span class="flex items-center"><i class="fa-solid fa-sack-dollar text-green-300 mr-2 text-lg"></i> 現場現金結清</span>
-                    <span class="flex items-center"><i class="fa-solid fa-shield-halved text-blue-300 mr-2 text-lg"></i> 隱私零外洩</span>
+                <h1 class="text-2xl sm:text-3xl md:text-5xl font-black mb-3 sm:mb-5 text-white tracking-tight drop-shadow-md">AI 智能估價，三分鐘掌握價值</h1>
+                <p class="text-blue-100 text-sm sm:text-lg max-w-2xl mx-auto mb-6 sm:mb-8 font-medium">同步全台大數據即時行情，保證無隱藏扣款。</p>
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-5 text-xs sm:text-sm font-bold text-white bg-white/10 w-fit mx-auto px-4 sm:px-6 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/20 shadow-lg">
+                    <span class="flex items-center"><i class="fa-solid fa-bolt text-yellow-300 mr-1.5 text-base"></i> 報價透明</span>
+                    <span class="flex items-center"><i class="fa-solid fa-sack-dollar text-green-300 mr-1.5 text-base"></i> 現場結清</span>
+                    <span class="flex items-center"><i class="fa-solid fa-shield-halved text-blue-300 mr-1.5 text-base"></i> 隱私安全</span>
                 </div>
             </div>
         </div>
@@ -115,39 +117,40 @@
         <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 flex flex-col justify-center items-center text-center p-4">
             <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDEwaDQwdjFIMHptMCAyMGg0MHYxSDB6TTEwIDB2NDBoLTFWMHptMjAgMHY0MGgtMVYweiIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIi8+PC9zdmc+')]"></div>
             <div class="relative z-10">
-                <h1 class="text-3xl md:text-5xl font-black mb-5 text-white tracking-tight drop-shadow-md">舊機換新機，享專屬折抵優惠</h1>
-                <p class="text-emerald-100 text-lg max-w-2xl mx-auto mb-8 font-medium">不僅高價回收！現場加購周邊配件再享專屬折扣，一次升級最划算。</p>
-                <div class="flex flex-wrap justify-center gap-5 text-sm font-bold text-white bg-white/10 w-fit mx-auto px-6 py-3 rounded-full backdrop-blur-sm border border-white/20 shadow-lg">
-                    <span class="flex items-center"><i class="fa-solid fa-mobile-screen text-yellow-300 mr-2 text-lg"></i> 舊機貼換新機</span>
-                    <span class="flex items-center"><i class="fa-solid fa-headphones text-green-300 mr-2 text-lg"></i> 專屬配件優惠</span>
+                <h1 class="text-2xl sm:text-3xl md:text-5xl font-black mb-3 sm:mb-5 text-white tracking-tight drop-shadow-md">舊機換新機，享專屬折抵優惠</h1>
+                <p class="text-emerald-100 text-sm sm:text-lg max-w-2xl mx-auto mb-6 sm:mb-8 font-medium">不僅高價回收！現場加購周邊配件再享專屬折扣。</p>
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-5 text-xs sm:text-sm font-bold text-white bg-white/10 w-fit mx-auto px-4 sm:px-6 py-2 sm:py-3 rounded-full backdrop-blur-sm border border-white/20 shadow-lg">
+                    <span class="flex items-center"><i class="fa-solid fa-mobile-screen text-yellow-300 mr-1.5 text-base"></i> 舊機換新機</span>
+                    <span class="flex items-center"><i class="fa-solid fa-headphones text-green-300 mr-1.5 text-base"></i> 配件優惠</span>
                 </div>
             </div>
         </div>
         
         <!-- 幻燈片控制鈕 -->
-        <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-20">
-            <button class="w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-colors carousel-dot shadow-sm"></button>
-            <button class="w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-colors carousel-dot shadow-sm"></button>
+        <div class="absolute bottom-4 sm:bottom-6 left-0 right-0 flex justify-center gap-3 z-20">
+            <button class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition-colors carousel-dot shadow-sm"></button>
+            <button class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition-colors carousel-dot shadow-sm"></button>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex flex-col lg:flex-row gap-8">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <!-- 核心變動：針對內螢幕(展開 md/lg) 採用左右雙欄，針對外螢幕(摺疊) 採用上下排列 -->
+        <div class="flex flex-col md:flex-row gap-6 md:gap-8">
             
             <!-- 左側：估價流程表單 -->
-            <div class="w-full lg:w-2/3 space-y-6">
+            <div class="w-full md:w-[55%] lg:w-2/3 space-y-6">
                 
                 <!-- 步驟 1: 選擇裝置 -->
-                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                        <div class="bg-blue-100 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
-                        <h2 class="text-xl font-bold text-dark">選擇裝置型號</h2>
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-3 mb-5 sm:mb-6 border-b border-slate-100 pb-4">
+                        <div class="bg-blue-100 text-primary w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">1</div>
+                        <h2 class="text-lg sm:text-xl font-bold text-dark">選擇裝置型號</h2>
                     </div>
 
-                    <!-- 品牌選擇 -->
+                    <!-- 品牌選擇 (獨立 iPhone 與 iPad 兩格) -->
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-slate-600 mb-3">廠牌</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="brand-container">
+                        <label class="block text-sm font-medium text-slate-600 mb-3">廠牌類別</label>
+                        <div class="grid grid-cols-2 gap-3" id="brand-container">
                             <!-- JS 動態生成品牌按鈕 -->
                         </div>
                     </div>
@@ -156,7 +159,7 @@
                     <div id="model-section" class="mb-6 hidden opacity-0 transition-opacity duration-500">
                         <label class="block text-sm font-medium text-slate-600 mb-3">型號</label>
                         <div class="relative">
-                            <select id="model-select" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-lg focus:ring-primary focus:border-primary block p-3 transition-colors appearance-none cursor-pointer">
+                            <select id="model-select" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-lg focus:ring-primary focus:border-primary block p-3 text-sm sm:text-base transition-colors appearance-none cursor-pointer">
                                 <option value="">請先選擇型號...</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
@@ -168,7 +171,7 @@
                     <!-- 顏色選擇 (預設隱藏) -->
                     <div id="color-section" class="mb-6 hidden opacity-0 transition-opacity duration-500 relative">
                         <label class="block text-sm font-medium text-slate-600 mb-3">機身顏色</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="color-container">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3" id="color-container">
                             <!-- JS 動態生成顏色按鈕 -->
                         </div>
                     </div>
@@ -176,192 +179,196 @@
                     <!-- 容量選擇 (預設隱藏) -->
                     <div id="capacity-section" class="hidden opacity-0 transition-opacity duration-500 relative">
                         <label class="block text-sm font-medium text-slate-600 mb-3">容量規格</label>
-                        <div class="grid grid-cols-3 gap-3" id="capacity-container">
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3" id="capacity-container">
                             <!-- JS 動態生成容量按鈕 -->
                         </div>
                     </div>
                 </section>
 
                 <!-- 步驟 2: 機況評估 -->
-                <section id="condition-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hidden opacity-0 transition-opacity duration-500">
-                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                        <div class="bg-blue-100 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
-                        <h2 class="text-xl font-bold text-dark">機況與功能評估</h2>
-                        <span class="ml-auto text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">據實填寫，估價更準確</span>
+                <section id="condition-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 hidden opacity-0 transition-opacity duration-500">
+                    <div class="flex items-center gap-3 mb-5 sm:mb-6 border-b border-slate-100 pb-4">
+                        <div class="bg-blue-100 text-primary w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-sm sm:text-base">2</div>
+                        <h2 class="text-lg sm:text-xl font-bold text-dark">機況與功能評估</h2>
+                        <span class="ml-auto text-[10px] sm:text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">據實填寫更準確</span>
                     </div>
 
-                    <div class="mb-8">
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-slate-400"></i>螢幕狀況</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- 螢幕狀況 -->
+                    <div class="mb-6 sm:mb-8">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-mobile-screen mr-2 text-slate-400"></i>螢幕狀況</h3>
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="screen" id="screen-perfect" value="1" class="hidden-radio" checked>
-                                <label for="screen-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">完美無瑕</div>
-                                    <div class="text-xs text-slate-500">無任何刮傷、亮點、老化或破裂</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="screen-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">完美無瑕</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">無任何刮傷、亮點、老化或破裂</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="screen" id="screen-scratch" value="0.9" class="hidden-radio">
-                                <label for="screen-scratch" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">輕微刮傷/老化</div>
-                                    <div class="text-xs text-slate-500">有肉眼可見之細微刮痕或輕微烙印</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="screen-scratch" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">輕微刮傷/老化</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">有肉眼可見之細微刮痕或輕微烙印</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
-                            <div>
+                            <div class="col-span-2 lg:col-span-1">
                                 <input type="radio" name="screen" id="screen-broken" value="0.5" class="hidden-radio">
-                                <label for="screen-broken" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">螢幕破裂/故障</div>
-                                    <div class="text-xs text-slate-500">玻璃破裂、漏液、線條或觸控不良</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="screen-broken" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">螢幕破裂/故障</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">玻璃破裂、漏液、線條或觸控不良</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-8">
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-mobile-button mr-2 text-slate-400"></i>機身外觀</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- 機身外觀 -->
+                    <div class="mb-6 sm:mb-8">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-mobile-button mr-2 text-slate-400"></i>機身外觀</h3>
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="body" id="body-perfect" value="1" class="hidden-radio" checked>
-                                <label for="body-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">外觀如新</div>
-                                    <div class="text-xs text-slate-500">機身無任何掉漆、撞傷或凹痕</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="body-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">外觀如新</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">機身無任何掉漆、撞傷或凹痕</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="body" id="body-scratch" value="0.95" class="hidden-radio">
-                                <label for="body-scratch" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">正常使用痕跡</div>
-                                    <div class="text-xs text-slate-500">邊框或背蓋有輕微掉漆或小刮痕</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="body-scratch" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">正常使用痕跡</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">邊框或背蓋有輕微掉漆或小刮痕</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
-                            <div>
+                            <div class="col-span-2 lg:col-span-1">
                                 <input type="radio" name="body" id="body-dented" value="0.8" class="hidden-radio">
-                                <label for="body-dented" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">明顯撞傷/變形</div>
-                                    <div class="text-xs text-slate-500">有明顯凹陷、玻璃背蓋破裂、機身彎曲</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="body-dented" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">明顯撞傷/變形</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">有明顯凹陷、玻璃背蓋破裂、機身彎曲</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
                     </div>
 
+                    <!-- 硬體功能 -->
                     <div>
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-microchip mr-2 text-slate-400"></i>硬體功能</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-microchip mr-2 text-slate-400"></i>硬體功能</h3>
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="function" id="func-perfect" value="1" class="hidden-radio" checked>
-                                <label for="func-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">功能全正常</div>
-                                    <div class="text-xs text-slate-500">FaceID/指紋、相機、通話、WIFI皆正常</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="func-perfect" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">功能全正常</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">FaceID/指紋、相機、通話、WIFI皆正常</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="function" id="func-broken" value="0.6" class="hidden-radio">
-                                <label for="func-broken" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">部分功能故障</div>
-                                    <div class="text-xs text-slate-500">生物辨識失效、相機抖動、無法充電等</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="func-broken" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">部分功能故障</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">生物辨識失效、相機抖動、無法充電等</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <!-- 電池健康度評估 -->
-                    <div class="mt-8">
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-battery-half mr-2 text-slate-400"></i>電池健康度</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="mt-6 sm:mt-8">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-battery-half mr-2 text-slate-400"></i>電池健康度</h3>
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="battery" id="bat-excellent" value="excellent" class="hidden-radio">
-                                <label for="bat-excellent" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">90% ~ 100%</div>
-                                    <div class="text-xs text-green-600 font-bold mb-1">加碼回饋</div>
+                                <label for="bat-excellent" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">90% ~ 100%</div>
+                                    <div class="text-[10px] sm:text-xs text-green-600 font-bold mb-1">加碼回饋</div>
                                     <div class="text-[10px] text-slate-500">電池極佳，可獲額外加價</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="battery" id="bat-good" value="good" class="hidden-radio" checked>
-                                <label for="bat-good" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">85% ~ 89%</div>
-                                    <div class="text-xs text-slate-500 mt-2">電池健康度正常，續航力良好</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="bat-good" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">85% ~ 89%</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500 mt-2">電池健康度正常，續航力良好</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="battery" id="bat-normal" value="normal" class="hidden-radio">
-                                <label for="bat-normal" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">80% ~ 84%</div>
-                                    <div class="text-xs text-slate-500 mt-2">正常耗損，顯示重要電池訊息</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="bat-normal" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">80% ~ 84%</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500 mt-2">正常耗損，顯示重要電池訊息</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="battery" id="bat-bad" value="bad" class="hidden-radio">
-                                <label for="bat-bad" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">低於 80%</div>
-                                    <div class="text-xs text-slate-500 mt-2">建議維修，或曾更換副廠電池</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="bat-bad" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">低於 80%</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500 mt-2">建議維修，或曾更換副廠電池</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <!-- 原廠保固狀態評估 -->
-                    <div class="mt-8">
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-shield-check mr-2 text-slate-400"></i>原廠保固狀態</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="mt-6 sm:mt-8">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-shield-check mr-2 text-slate-400"></i>原廠保固狀態</h3>
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="warranty" id="war-long" value="long" class="hidden-radio">
-                                <label for="war-long" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">剩餘半年以上</div>
-                                    <div class="text-xs text-green-600 font-bold mb-1">加碼回饋</div>
+                                <label for="war-long" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">剩餘半年以上</div>
+                                    <div class="text-[10px] sm:text-xs text-green-600 font-bold mb-1">加碼回饋</div>
                                     <div class="text-[10px] text-slate-500">尚在保固期內，可獲額外加價</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="warranty" id="war-short" value="short" class="hidden-radio">
-                                <label for="war-short" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">剩餘三個月內</div>
-                                    <div class="text-xs text-green-600 font-bold mb-1">加碼回饋</div>
+                                <label for="war-short" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">剩餘三個月內</div>
+                                    <div class="text-[10px] sm:text-xs text-green-600 font-bold mb-1">加碼回饋</div>
                                     <div class="text-[10px] text-slate-500">短效期保固，可獲額外加價</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
-                            <div>
+                            <div class="col-span-2 lg:col-span-1">
                                 <input type="radio" name="warranty" id="war-none" value="none" class="hidden-radio" checked>
-                                <label for="war-none" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">已經過保</div>
-                                    <div class="text-xs text-slate-500 mt-2">已超過原廠保固期限</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="war-none" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">已經過保</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500 mt-2">已超過原廠保固期限</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-8">
-                        <h3 class="font-medium text-slate-700 mb-3 flex items-center"><i class="fa-solid fa-box-open mr-2 text-slate-400"></i>原廠配件</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- 原廠配件 -->
+                    <div class="mt-6 sm:mt-8">
+                        <h3 class="font-medium text-slate-700 mb-3 flex items-center text-sm sm:text-base"><i class="fa-solid fa-box-open mr-2 text-slate-400"></i>原廠配件</h3>
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
                             <div>
                                 <input type="radio" name="box" id="box-yes" value="1" class="hidden-radio" checked>
-                                <label for="box-yes" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">盒裝完整</div>
-                                    <div class="text-xs text-slate-500">附有原本的手機外盒</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="box-yes" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">盒裝完整</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">附有原本的手機外盒</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" name="box" id="box-no" value="0.95" class="hidden-radio">
-                                <label for="box-no" class="block bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
-                                    <div class="font-bold text-slate-800 mb-1">無原廠盒裝</div>
-                                    <div class="text-xs text-slate-500">僅有單機，無外盒</div>
-                                    <i class="fa-solid fa-circle-check absolute top-4 right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
+                                <label for="box-no" class="block bg-white border-2 border-slate-200 rounded-xl p-3 sm:p-4 cursor-pointer transition-all hover:border-slate-300 relative h-full">
+                                    <div class="font-bold text-slate-800 text-sm sm:text-base mb-1">無原廠盒裝</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-500">僅有單機，無外盒</div>
+                                    <i class="fa-solid fa-circle-check absolute top-3 sm:top-4 right-3 sm:right-4 text-primary opacity-0 transform scale-50 transition-all check-icon"></i>
                                 </label>
                             </div>
                         </div>
@@ -369,53 +376,54 @@
                 </section>
             </div>
 
-            <div class="w-full lg:w-1/3">
-                <div class="bg-white rounded-2xl shadow-xl border border-slate-200 sticky top-24 overflow-hidden">
+            <!-- 右側：報價明細面板，內螢幕時會在右側 Sticky，外螢幕時在底部 -->
+            <div class="w-full md:w-[45%] lg:w-1/3">
+                <div class="bg-white rounded-2xl shadow-xl border border-slate-200 md:sticky md:top-20 overflow-hidden">
                     <!-- 卡片頂部裝飾 -->
                     <div class="h-2 bg-gradient-to-r from-primary to-blue-600"></div>
                     
-                    <div class="p-6">
+                    <div class="p-5 sm:p-6">
                         <h3 class="text-lg font-bold text-dark mb-4 border-b border-slate-100 pb-2">估價明細</h3>
                         
                         <!-- 尚未選擇提示 -->
-                        <div id="empty-state" class="text-center py-10">
-                            <i class="fa-solid fa-mobile-retro text-4xl text-slate-200 mb-3"></i>
-                            <p class="text-slate-500 text-sm">請於左側選擇您的手機型號與機況，系統將即時計算收購價格。</p>
+                        <div id="empty-state" class="text-center py-8 sm:py-10">
+                            <i class="fa-solid fa-mobile-retro text-3xl sm:text-4xl text-slate-200 mb-3"></i>
+                            <p class="text-slate-500 text-xs sm:text-sm">請於左側選擇您的裝置型號與機況，系統將即時計算收購價格。</p>
                         </div>
 
                         <!-- 估價結果區塊 (預設隱藏) -->
                         <div id="result-state" class="hidden">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <div id="result-brand" class="text-xs text-slate-500 font-medium mb-1">APPLE</div>
-                                    <div id="result-model" class="text-base font-bold text-dark">iPhone 15 Pro Max</div>
+                                    <div id="result-brand" class="text-[10px] sm:text-xs text-slate-500 font-medium mb-1">APPLE</div>
+                                    <div id="result-model" class="text-sm sm:text-base font-bold text-dark">iPhone 17 Pro Max</div>
                                 </div>
                                 <div class="flex flex-col items-end gap-1">
-                                    <div id="result-capacity" class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-bold">256GB</div>
-                                    <div class="bg-red-50 text-red-500 border border-red-100 px-2 py-1 rounded text-[10px] font-bold">僅限台灣版</div>
+                                    <div id="result-capacity" class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-[10px] sm:text-xs font-bold">256GB</div>
+                                    <div class="bg-red-50 text-red-500 border border-red-100 px-2 py-1 rounded text-[9px] sm:text-[10px] font-bold">僅限台灣版</div>
                                 </div>
                             </div>
                             
-                            <div class="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <div class="text-sm text-slate-500 mb-1 text-center">最高預估收購價</div>
-                                <div class="text-4xl font-black text-center text-primary tracking-tight mb-2" id="final-price">NT$ 0</div>
-                                <div class="text-[10px] text-slate-400 text-center mb-4" id="update-date-display">報價更新日期：-</div>
+                            <div class="mt-4 sm:mt-6 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <div class="text-xs sm:text-sm text-slate-500 mb-1 text-center">最高預估收購價</div>
+                                <div class="text-3xl sm:text-4xl font-black text-center text-primary tracking-tight mb-2" id="final-price">NT$ 0</div>
+                                <div class="text-[9px] sm:text-[10px] text-slate-400 text-center mb-4" id="update-date-display">報價更新日期：-</div>
                                 
                                 <!-- 蘋果官網對比區塊 -->
-                                <div id="apple-compare-box" class="mb-4 bg-green-50 border border-green-200 rounded-lg p-3 text-center hidden">
-                                    <div class="text-xs text-green-700 mb-1"><i class="fa-brands fa-apple"></i> 蘋果官網可能只有 <span id="apple-price-display" class="font-bold line-through">NT$ 0</span></div>
-                                    <div class="text-sm font-bold text-green-600">在星果科技回收，您最高可多拿 <span id="extra-earn-display" class="text-lg">NT$ 0</span>！</div>
+                                <div id="apple-compare-box" class="mb-4 bg-green-50 border border-green-200 rounded-lg p-2 sm:p-3 text-center hidden">
+                                    <div class="text-[10px] sm:text-xs text-green-700 mb-1"><i class="fa-brands fa-apple"></i> 蘋果官網可能只有 <span id="apple-price-display" class="font-bold line-through">NT$ 0</span></div>
+                                    <div class="text-xs sm:text-sm font-bold text-green-600">在星果科技回收，您最高可多拿 <span id="extra-earn-display" class="text-sm sm:text-lg">NT$ 0</span>！</div>
                                 </div>
 
                                 <!-- 舊換新折扣橫幅 -->
-                                <div class="mb-4 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-lg p-3 text-center">
-                                    <div class="text-sm font-bold text-orange-600 flex items-center justify-center gap-2">
+                                <div class="mb-4 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-lg p-2 sm:p-3 text-center">
+                                    <div class="text-xs sm:text-sm font-bold text-orange-600 flex items-center justify-center gap-1 sm:gap-2">
                                         <i class="fa-solid fa-gift"></i> 舊機貼換新機，再享額外折扣
                                     </div>
-                                    <div class="text-[10px] text-orange-500 mt-1">詳情請洽線上客服</div>
+                                    <div class="text-[9px] sm:text-[10px] text-orange-500 mt-1">詳情請洽線上客服</div>
                                 </div>
                                 
-                                <div class="mt-4 pt-4 border-t border-slate-200/60 space-y-2 text-sm" id="deduction-details">
+                                <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-200/60 space-y-2 text-xs sm:text-sm" id="deduction-details">
                                     <!-- 扣款明細動態生成 -->
                                     <div class="flex justify-between text-slate-500">
                                         <span>初步鑑價</span>
@@ -424,11 +432,11 @@
                                     
                                     <!-- 加碼明細 -->
                                     <div class="flex justify-between text-green-600 hidden font-bold" id="battery-bonus-row">
-                                        <span>電池健康度極佳 (加碼)</span>
+                                        <span>電池極佳 (加碼)</span>
                                         <span id="battery-bonus">+ NT$ 0</span>
                                     </div>
                                     <div class="flex justify-between text-green-600 hidden font-bold" id="warranty-bonus-row">
-                                        <span>尚有原廠保固 (加碼)</span>
+                                        <span>尚有保固 (加碼)</span>
                                         <span id="warranty-bonus">+ NT$ 0</span>
                                     </div>
 
@@ -456,25 +464,24 @@
                             </div>
 
                             <!-- 專業免責聲明 -->
-                            <div class="text-xs text-slate-500 mt-4 bg-blue-50 p-3 rounded-lg border border-blue-100 leading-relaxed">
+                            <div class="text-[10px] sm:text-xs text-slate-500 mt-4 bg-blue-50 p-3 rounded-lg border border-blue-100 leading-relaxed">
                                 <p class="font-bold text-primary mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>重要注意事項</p>
                                 <ul class="list-disc pl-4 space-y-1">
-                                    <li>本系統報價 <span class="font-bold text-red-500">暫時僅限收購台灣原廠公司貨（台版）</span>，國外版本/水貨請聯絡客服另外估價。</li>
-                                    <li>此為線上初步估價。部分潛在瑕疵（如：<span class="font-bold text-slate-700">鏡頭內部入塵斑點、主機板微受潮、曾更換非原廠零件等</span>）為一般日常使用難以察覺之狀況。</li>
-                                    <li>為保障雙方權益，實際收購金額需由工程師進行專業實機檢測後方能確認。若檢測有異，我們將詳細為您解說，絕不強迫回收。</li>
+                                    <li>本系統報價 <span class="font-bold text-red-500">暫時僅限收購台灣原廠公司貨（台版）</span>。</li>
+                                    <li>此為線上初步估價。部分潛在瑕疵（如：<span class="font-bold text-slate-700">鏡頭入塵、主機板微受潮、非原廠零件等</span>）為日常難以察覺之狀況。</li>
+                                    <li>為保障雙方權益，實際收購金額需由工程師進行實機檢測後確認。若有異會詳細解說，絕不強迫回收。</li>
                                     <li>Apple官方折抵金額可能隨時調整，若本站價格資料未能即時同步更新，請務必至 Apple 官網查詢最新估價標準。</li>
-
                                 </ul>
                             </div>
 
-                            <div class="mt-6 space-y-3">
+                            <div class="mt-5 sm:mt-6">
                                 <!-- 綁定 LINE 客服連結 -->
-                                <a href="http://lin.ee/9ikyFKx" target="_blank" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
-                                    <i class="fa-solid fa-user-tie"></i> 立即連絡客服進行鑑價，有機會獲得加碼金！
+                                <a href="http://lin.ee/9ikyFKx" target="_blank" class="w-full bg-primary hover:bg-blue-600 text-white text-sm sm:text-base font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                                    <i class="fa-solid fa-user-tie"></i> 立即連絡客服鑑價,就有機會獲得加碼金！
                                 </a>
                             </div>
-                            <p class="text-[10px] text-slate-400 text-center mt-4">
-                                * 實際收購金額需以工程師現場實機檢測為準。報價有效期限為3天。
+                            <p class="text-[9px] sm:text-[10px] text-slate-400 text-center mt-3 sm:mt-4">
+                                * 實際收購金額以現場檢測為準。報價有效期限 3 天。
                             </p>
                         </div>
                     </div>
@@ -483,44 +490,13 @@
         </div>
     </main>
 
-    <!-- 價格管理後台 Modal -->
-    <div id="price-manager-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
-            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-primary"></i>
-                    <h3 class="font-bold text-lg text-slate-800">隨時調整手機回收價格 (市場即時變動)</h3>
-                </div>
-                <button onclick="closePriceManager()" class="text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-white shadow-sm">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-4 flex-1">
-                <p class="text-xs text-slate-600 bg-blue-50 text-blue-700 p-3 rounded-lg border border-blue-100">
-                    💡 說明：在此直接修改各型號的基準價格，修改後點擊「儲存變更」，網頁估價結果將會立即連動更新！資料會安全儲存於您的瀏覽器中。
-                </p>
-                <div id="price-editor-list" class="space-y-3">
-                    <!-- JS 動態生成可編輯的價格列表 -->
-                </div>
-            </div>
-            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
-                <button onclick="resetDefaultPrices()" class="text-xs text-red-500 hover:text-red-700 font-medium">
-                    <i class="fa-solid fa-rotate-left mr-1"></i> 還原預設價格
-                </button>
-                <div class="flex gap-2">
-                    <button onclick="closePriceManager()" class="px-4 py-2 bg-slate-200 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-300 transition-colors">取消</button>
-                    <button onclick="savePrices()" class="px-5 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-sky-600 transition-colors shadow-sm">儲存變更</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-white border-t border-slate-200 mt-12 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-slate-500 text-sm">
+    <!-- 頁尾 -->
+    <footer class="bg-white border-t border-slate-200 mt-8 sm:mt-12 py-6 sm:py-8 mb-16 sm:mb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+            <div class="text-slate-500 text-xs sm:text-sm text-center md:text-left">
                 &copy; 2026 星果科技回收估價系統. All rights reserved.
             </div>
-            <div class="flex gap-4 text-sm text-slate-500">
+            <div class="flex gap-4 text-xs sm:text-sm text-slate-500">
                 <a href="#" onclick="openModal('terms-modal')" class="hover:text-primary">服務條款</a>
                 <a href="#" onclick="openModal('privacy-modal')" class="hover:text-primary">隱私權政策</a>
             </div>
@@ -533,165 +509,145 @@
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
             <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-2xl w-full">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="flex justify-between items-center mb-5 border-b pb-3">
-                        <h3 class="text-xl leading-6 font-bold text-slate-900" id="modal-title">星果科技 - 舊機回收流程</h3>
+                    <div class="flex justify-between items-center mb-4 sm:mb-5 border-b pb-3">
+                        <h3 class="text-lg sm:text-xl leading-6 font-bold text-slate-900">星果科技 - 舊機回收流程</h3>
                         <button onclick="closeModal('process-modal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
                     </div>
-                    <div class="mt-2 space-y-6">
-                        <div class="flex gap-4 items-start">
-                            <div class="flex-shrink-0 bg-blue-100 text-primary w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">1</div>
+                    <div class="mt-2 space-y-4 sm:space-y-6">
+                        <div class="flex gap-3 sm:gap-4 items-start">
+                            <div class="flex-shrink-0 bg-blue-100 text-primary w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-base sm:text-lg">1</div>
                             <div>
-                                <h4 class="text-lg font-bold text-slate-800">線上初步估價</h4>
-                                <p class="text-slate-500 text-sm mt-1">透過本網站，選擇您的手機型號、容量並據實填寫機況，系統將即時試算初步鑑價金額。</p>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-800">線上初步估價</h4>
+                                <p class="text-slate-500 text-xs sm:text-sm mt-1">透過本網站，選擇您的裝置型號、容量並據實填寫機況，系統將即時試算初步鑑價金額。</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="flex-shrink-0 bg-blue-100 text-primary w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">2</div>
+                        <div class="flex gap-3 sm:gap-4 items-start">
+                            <div class="flex-shrink-0 bg-blue-100 text-primary w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-base sm:text-lg">2</div>
                             <div>
-                                <h4 class="text-lg font-bold text-slate-800">聯絡客服人員</h4>
-                                <p class="text-slate-500 text-sm mt-1">滿意初步報價後，點擊「聯絡人員進行鑑價」加入官方 LINE 客服，專人將與您確認細節並預約時間。</p>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-800">聯絡客服人員</h4>
+                                <p class="text-slate-500 text-xs sm:text-sm mt-1">滿意初步報價後，點擊「立即連絡客服鑑價」加入官方 LINE 客服，專人將與您確認細節並預約時間。</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="flex-shrink-0 bg-blue-100 text-primary w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">3</div>
+                        <div class="flex gap-3 sm:gap-4 items-start">
+                            <div class="flex-shrink-0 bg-blue-100 text-primary w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-base sm:text-lg">3</div>
                             <div>
-                                <h4 class="text-lg font-bold text-slate-800">工程師實機檢測</h4>
-                                <p class="text-slate-500 text-sm mt-1">雙方會合後，由專業工程師進行實機檢測。若機況與線上描述相符，將絕不亂砍價。</p>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-800">工程師實機檢測</h4>
+                                <p class="text-slate-500 text-xs sm:text-sm mt-1">雙方會合後，由專業工程師進行實機檢測。若機況與線上描述相符，將絕不亂砍價。</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="flex-shrink-0 bg-blue-100 text-primary w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">4</div>
+                        <div class="flex gap-3 sm:gap-4 items-start">
+                            <div class="flex-shrink-0 bg-blue-100 text-primary w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-base sm:text-lg">4</div>
                             <div>
-                                <h4 class="text-lg font-bold text-slate-800">現場現金結清</h4>
-                                <p class="text-slate-500 text-sm mt-1">確認最終回收金額後，當下填寫讓渡書，並立即以現金結清，安全又快速。</p>
+                                <h4 class="text-base sm:text-lg font-bold text-slate-800">現場現金結清</h4>
+                                <p class="text-slate-500 text-xs sm:text-sm mt-1">確認最終回收金額後，當下填寫讓渡書，並立即以現金結清，安全又快速。</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="closeModal('process-modal')" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">了解</button>
+                    <button type="button" onclick="closeModal('process-modal')" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary text-sm sm:text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto">了解</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 彈出視窗：服務條款 -->
+    <!-- 服務條款 -->
     <div id="terms-modal" class="fixed inset-0 z-[100] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal('terms-modal')"></div>
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
             <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl w-full h-[80vh] flex flex-col">
-                <div class="px-4 py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
-                    <h3 class="text-lg leading-6 font-bold text-slate-900">服務條款 (Terms of Service)</h3>
+                <div class="px-4 py-4 sm:py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
+                    <h3 class="text-base sm:text-lg leading-6 font-bold text-slate-900">服務條款</h3>
                     <button onclick="closeModal('terms-modal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
-                <div class="p-6 overflow-y-auto flex-1 text-sm text-slate-600 space-y-4">
+                <div class="p-4 sm:p-6 overflow-y-auto flex-1 text-xs sm:text-sm text-slate-600 space-y-4">
                     <p class="font-bold">第一條、認知與接受條款</p>
-                    <p>歡迎您使用「星果科技回收估價系統」（以下簡稱本系統）。本系統係依據本服務條款提供二手3C產品之估價及收購服務。當您使用本系統時，即表示您已閱讀、瞭解並同意接受本服務條款之所有內容。若您未滿二十歲，應於您的家長（或監護人）閱讀、瞭解並同意本約定書之所有內容及其後修改變更後，方得使用或繼續使用本服務。</p>
-                    
+                    <p>歡迎您使用「星果科技回收估價系統」。本系統係依據本服務條款提供二手3C產品之估價及收購服務。當您使用本系統時，即表示您已閱讀、瞭解並同意接受本服務條款之所有內容。</p>
                     <p class="font-bold">第二條、估價與報價說明</p>
-                    <p>1. 本系統提供之「初步鑑價」金額，係依據您於網頁上所選擇之機型、規格及自行勾選之機況所計算得出之預估價格。此價格並非最終收購價格。<br>
-                    2. 實際收購價格需待本公司工程師實機檢測，依據行政院消費者保護處相關規範，確認實際機況（包含但不限於外觀瑕疵、內部零件是否原廠、受潮、功能異常等）後，方能給予最終準確報價。<br>
-                    3. 若實機檢測結果與您線上填寫之機況完全相符，且無其他隱藏瑕疵，本公司原則上將依「初步鑑價」金額進行收購。</p>
-                    
+                    <p>本系統提供之「初步鑑價」金額，係依據您於網頁上所選擇之機型、規格及自行勾選之機況所計算得出之預估價格。實際收購價格需待本公司工程師實機檢測確認後方能給予最終準確報價。</p>
                     <p class="font-bold">第三條、收購規範與來源合法性</p>
-                    <p>1. 依據《個人資料保護法》及相關法令，辦理收購手續時，您需年滿20歲，並須出示有效之身分證明文件正本（身分證）供核對登記，並需填寫「商品讓渡書」。<br>
-                    2. 您必須保證所出售之商品來源合法，絕非偷竊、侵占、詐欺或違反任何法令所取得之贓物。<br>
-                    3. 若事後查證該商品為贓物或來源不明，本公司將主動配合檢警機關調查，並提供讓渡書及相關資料。您需承擔所有法律責任，並賠償本公司因此所受之一切損失（包含但不限於收購金額、商譽損失、訴訟費用等）。</p>
-                    
-                    <p class="font-bold">第四條、資料抹除與隱私</p>
-                    <p>在交付裝置前，您有責任自行備份並清除裝置內所有個人資料。本公司在完成收購後，將進行標準重置程序，但對於您未自行刪除之資料所造成之外洩或遺失，本公司概不負責。</p>
+                    <p>辦理收購手續時，您需年滿20歲，並須出示有效之身分證明文件正本。您必須保證所出售之商品來源合法，絕非偷竊、侵占、詐欺或違反任何法令所取得之贓物。</p>
                 </div>
                 <div class="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t">
-                    <button type="button" onclick="closeModal('terms-modal')" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">同意並關閉</button>
+                    <button type="button" onclick="closeModal('terms-modal')" class="w-full inline-flex justify-center rounded-xl px-4 py-2 bg-primary text-sm sm:text-base font-medium text-white hover:bg-blue-600">同意並關閉</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 彈出視窗：隱私權政策 -->
+    <!-- 隱私權 -->
     <div id="privacy-modal" class="fixed inset-0 z-[100] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal('privacy-modal')"></div>
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
             <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl w-full h-[80vh] flex flex-col">
-                <div class="px-4 py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
-                    <h3 class="text-lg leading-6 font-bold text-slate-900">隱私權政策 (Privacy Policy)</h3>
+                <div class="px-4 py-4 sm:py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
+                    <h3 class="text-base sm:text-lg leading-6 font-bold text-slate-900">隱私權政策</h3>
                     <button onclick="closeModal('privacy-modal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
-                <div class="p-6 overflow-y-auto flex-1 text-sm text-slate-600 space-y-4">
-                    <p>星果科技（以下簡稱「我們」）非常重視您的隱私權。本隱私權政策旨在說明我們如何蒐集、處理、利用與保護您的個人資料，一切均依照中華民國《個人資料保護法》之規定辦理。</p>
-
+                <div class="p-4 sm:p-6 overflow-y-auto flex-1 text-xs sm:text-sm text-slate-600 space-y-4">
+                    <p>星果科技非常重視您的隱私權。本隱私權政策旨在說明我們如何蒐集、處理、利用與保護您的個人資料。</p>
                     <p class="font-bold">一、個人資料的蒐集目的與類別</p>
-                    <p>1. 蒐集目的：我們蒐集您的個人資料，主要用於完成二手3C產品之收購交易、提供客戶服務、身分查核、防制洗錢與打擊資恐相關規範之遵循，以及未來之行銷資訊發送。<br>
-                    2. 蒐集類別：在您使用線上估價時，我們不會強制要求提供個資。但在您實際進行交易簽署「讓渡書」時，我們將依法蒐集您的：姓名、身分證字號、聯絡電話、戶籍/通訊地址等辨識個人者之資料。</p>
-
-                    <p class="font-bold">二、個人資料的利用期間、地區、對象及方式</p>
-                    <p>1. 期間：您的個人資料將於蒐集目的之存續期間，或依法令規定（如商業會計法）要求之保存期限內保留。<br>
-                    2. 地區：您的個人資料將主要於台灣地區內利用。<br>
-                    3. 對象與方式：我們將以電子或紙本形式，於上述目的範圍內，由本公司內部人員進行處理與利用。我們不會將您的個資販售或提供給第三方，除非基於司法檢調機關之合法要求（如追查贓物）。</p>
-
-                    <p class="font-bold">三、當事人之權利行使</p>
-                    <p>依據《個人資料保護法》第3條，您可向我們行使以下權利：<br>
-                    (1) 查詢或請求閱覽。<br>
-                    (2) 請求製給複製本。<br>
-                    (3) 請求補充或更正。<br>
-                    (4) 請求停止蒐集、處理或利用。<br>
-                    (5) 請求刪除。<br>
-                    若您需行使上述權利，可透過我們的官方LINE客服提出申請。</p>
-
-                    <p class="font-bold">四、設備內個人資料之清除聲明</p>
-                    <p>我們在此強烈建議並提醒您，於交付回收裝置前，務必自行備份並「完全重置（恢復原廠設定）」您的裝置，清除所有照片、帳號、密碼及應用程式資料。雖本公司於收購後會執行標準的資料抹除作業，但對於您交付前未清除之資料外洩風險，本公司不負相關賠償責任。</p>
+                    <p>我們蒐集您的個人資料，主要用於完成二手3C產品之收購交易、提供客戶服務等。在您實際進行交易簽署「讓渡書」時，我們將依法蒐集您的身分認證資料。</p>
+                    <p class="font-bold">二、設備內個人資料之清除聲明</p>
+                    <p>強烈建議於交付回收裝置前，務必自行備份並「完全重置」您的裝置。雖本公司於收購後會執行標準的資料抹除作業，但對於交付前未清除之資料外洩風險，本公司不負相關賠償責任。</p>
                 </div>
                 <div class="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t">
-                    <button type="button" onclick="closeModal('privacy-modal')" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">了解並關閉</button>
+                    <button type="button" onclick="closeModal('privacy-modal')" class="w-full inline-flex justify-center rounded-xl px-4 py-2 bg-primary text-sm sm:text-base font-medium text-white hover:bg-blue-600">了解並關閉</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 彈出視窗：常見問題 FAQ -->
+    <!-- 常見問題 -->
     <div id="faq-modal" class="fixed inset-0 z-[100] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal('faq-modal')"></div>
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
             <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl w-full h-[80vh] flex flex-col">
-                <div class="px-4 py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
-                    <h3 class="text-lg leading-6 font-bold text-slate-900">常見問題 (FAQ)</h3>
+                <div class="px-4 py-4 sm:py-5 border-b sm:px-6 flex justify-between items-center bg-slate-50">
+                    <h3 class="text-base sm:text-lg leading-6 font-bold text-slate-900">常見問題 (FAQ)</h3>
                     <button onclick="closeModal('faq-modal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
-                <div class="p-6 overflow-y-auto flex-1 text-sm text-slate-600 space-y-6">
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <h4 class="font-bold text-slate-800 mb-2 flex items-center text-base"><i class="fa-solid fa-circle-question text-primary mr-2"></i>現場收購流程需要帶什麼文件？</h4>
-                        <p class="pl-7 leading-relaxed">依據台灣政府法規，為防範銷贓，辦理二手機收購時<span class="font-bold text-red-500">必須年滿 20 歲</span>，並攜帶您的<span class="font-bold text-slate-700">「身分證正本」</span>供我們核對身分與登記，同時需於現場填寫「商品讓渡書」。未滿 20 歲需由法定代理人陪同辦理。</p>
+                <div class="p-4 sm:p-6 overflow-y-auto flex-1 text-xs sm:text-sm text-slate-600 space-y-5">
+                    <div class="bg-blue-50 p-3 sm:p-4 rounded-xl border border-blue-100">
+                        <h4 class="font-bold text-slate-800 mb-2 flex items-center"><i class="fa-solid fa-circle-question text-primary mr-2"></i>現場收購流程需要帶什麼文件？</h4>
+                        <p class="pl-6 sm:pl-7 leading-relaxed">依據法規辦理二手機收購時必須年滿 20 歲，並攜帶您的「身分證正本」供核對身分與登記。</p>
                     </div>
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <h4 class="font-bold text-slate-800 mb-2 flex items-center text-base"><i class="fa-solid fa-circle-question text-primary mr-2"></i>手機裡面的資料個資會不會外洩？</h4>
-                        <p class="pl-7 leading-relaxed">我們非常注重客戶隱私！建議您在交機前先自行備份，並登出 Apple ID 且「清除所有內容與設定」。即使您忘記，我們的工程師在檢測完成且交易確認後，<span class="font-bold text-slate-700">售出前會再次執行標準化的資料重置與抹除流程</span>，確保個資絕不外流。</p>
+                    <div class="bg-blue-50 p-3 sm:p-4 rounded-xl border border-blue-100">
+                        <h4 class="font-bold text-slate-800 mb-2 flex items-center"><i class="fa-solid fa-circle-question text-primary mr-2"></i>手機裡面的資料個資會不會外洩？</h4>
+                        <p class="pl-6 sm:pl-7 leading-relaxed">工程師在檢測完成且交易確認後，售出前會再次執行標準化的資料重置與抹除流程，確保個資絕不外流。</p>
                     </div>
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <h4 class="font-bold text-slate-800 mb-2 flex items-center text-base"><i class="fa-solid fa-circle-question text-primary mr-2"></i>網頁上的報價是最終價格嗎？</h4>
-                        <p class="pl-7 leading-relaxed">網頁系統為「線上初步鑑價」。若實機檢測後，機況與您線上填寫的一致（無肉眼難見的隱形瑕疵如：受潮、螢幕老化、曾維修非原廠零件等），就會依照該價格收購。若有落差，工程師會向您詳細說明原因並重新報價，<span class="font-bold text-slate-700">您絕對有權利決定是否交易，我們絕不強迫收購。</span></p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <h4 class="font-bold text-slate-800 mb-2 flex items-center text-base"><i class="fa-solid fa-circle-question text-primary mr-2"></i>有提供舊機貼換新機的服務嗎？</h4>
-                        <p class="pl-7 leading-relaxed">有的！我們非常歡迎您持舊機來店貼換新機。除了享有原先的高價回收金外，現場舊換新、或加購保護貼、防摔殼等周邊配件，皆<span class="font-bold text-slate-700">享有專屬優惠折扣</span>，幫您一次升級最划算！</p>
+                    <div class="bg-blue-50 p-3 sm:p-4 rounded-xl border border-blue-100">
+                        <h4 class="font-bold text-slate-800 mb-2 flex items-center"><i class="fa-solid fa-circle-question text-primary mr-2"></i>網頁上的報價是最終價格嗎？</h4>
+                        <p class="pl-6 sm:pl-7 leading-relaxed">若實機檢測後無肉眼難見的隱形瑕疵，就會依照網頁初步鑑價收購。若有落差，我們絕不強迫收購。</p>
                     </div>
                 </div>
                 <div class="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t">
-                    <button type="button" onclick="closeModal('faq-modal')" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">關閉</button>
+                    <button type="button" onclick="closeModal('faq-modal')" class="w-full inline-flex justify-center rounded-xl px-4 py-2 bg-primary text-sm sm:text-base font-medium text-white hover:bg-blue-600">關閉</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 懸浮 LINE 客服按鈕 -->
-    <a href="http://lin.ee/9ikyFKx" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-full p-4 shadow-xl shadow-green-500/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group" title="聯絡 LINE 客服">
-        <i class="fa-brands fa-line text-3xl"></i>
-        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out ml-0 group-hover:ml-2 font-bold text-sm">LINE 線上客服</span>
-    </a>
+    <!-- 懸浮聯絡按鈕群組 (蝦皮與 LINE) 適配窄螢幕 -->
+    <div class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-3">
+        <!-- 蝦皮賣場泡泡 -->
+        <a href="https://shopee.tw/kevin207931" target="_blank" class="bg-[#EE4D2D] hover:bg-[#d74528] text-white rounded-full p-3 sm:p-4 shadow-xl shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group" title="蝦皮賣場">
+            <i class="fa-solid fa-bag-shopping text-2xl sm:text-3xl"></i>
+            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out ml-0 group-hover:ml-2 font-bold text-xs sm:text-sm">蝦皮賣場</span>
+        </a>
+        
+        <!-- LINE 客服泡泡 -->
+        <a href="http://lin.ee/9ikyFKx" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white rounded-full p-3 sm:p-4 shadow-xl shadow-green-500/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group" title="聯絡 LINE 客服">
+            <i class="fa-brands fa-line text-2xl sm:text-3xl"></i>
+            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out ml-0 group-hover:ml-2 font-bold text-xs sm:text-sm">LINE 線上客服</span>
+        </a>
+    </div>
 
     <script>
-        // 設定管理者密碼（可自行更改引號內的密鑰）
-        const ADMIN_PASSWORD = "0933211733";
-
+        // ==========================================
+        // 🔻 價格修改區塊：您可以在下方直接修改 iPhone 與 iPad 的初始回收價格 🔻
+        // ==========================================
+        
         const colorSets = {
             pro17: ['橘色', '銀色', '藍色'],
             base17: ['薰衣草紫色', '霧藍色', '白色', '鼠尾草綠色', '黑色'],
@@ -706,46 +662,70 @@
             pro12: ['太平洋藍色', '金色', '銀色', '石墨色'],
             base12: ['紫色', '藍色', '綠色', '紅色', '白色', '黑色'],
             pro11: ['夜幕綠色', '銀色', '太空灰色', '金色'],
-            base11: ['紫色', '黃色', '綠色', '黑色', '白色', '紅色']
+            base11: ['紫色', '黃色', '綠色', '黑色', '白色', '紅色'],
+            // iPad 色系 (對照 Apple 官網最新標準)
+            ipadProM4: ['太空黑色', '銀色'],
+            ipadProM2: ['太空灰色', '銀色'],
+            ipadAirM2: ['太空灰色', '藍色', '紫色', '星光色'],
+            ipadAir5: ['太空灰色', '星光色', '粉紅色', '紫色', '藍色'],
+            ipad10: ['銀色', '藍色', '粉紅色', '黃色'],
+            ipad9: ['太空灰色', '銀色'],
+            ipadmini: ['太空灰色', '藍色', '紫色', '星光色']
         };
 
         const defaultDatabase = {
             brands: [
-                { id: 'apple', name: 'Apple', icon: 'fa-apple' }
+                { id: 'iphone', name: 'iPhone', icon: 'fa-apple' },
+                { id: 'ipad', name: 'iPad', icon: 'fa-tablet-screen-button' }
             ],
             models: {
-                'apple': [
-                    { id: 'ip17pm', name: 'iPhone 17 Pro Max', colors: colorSets.pro17, capacities: [{ cap: '256GB', price: 31000 }, { cap: '512GB', price: 33500 }, { cap: '1TB', price: 37000 }, { cap: '2TB', price: 41000 }] },
-    { id: 'ip17p', name: 'iPhone 17 Pro', colors: colorSets.pro17, capacities: [{ cap: '256GB', price: 27000 }, { cap: '512GB', price: 31000 }, { cap: '1TB', price: 33000 }] },
-    { id: 'ip17', name: 'iPhone 17', colors: colorSets.base17, capacities: [{ cap: '256GB', price: 20000 }, { cap: '512GB', price: 23000 }] },
-    { id: 'ip16pm', name: 'iPhone 16 Pro Max', colors: colorSets.pro16, capacities: [{ cap: '256GB', price: 23000 }, { cap: '512GB', price: 25000 }, { cap: '1TB', price: 27000 }] },
-    { id: 'ip16p', name: 'iPhone 16 Pro', colors: colorSets.pro16, capacities: [{ cap: '128GB', price: 17000 }, { cap: '256GB', price: 19000 }, { cap: '512GB', price: 21000 }, { cap: '1TB', price: 23000 }] },
-    { id: 'ip16pl', name: 'iPhone 16 Plus', colors: colorSets.base16, capacities: [{ cap: '128GB', price: 15000 }, { cap: '256GB', price: 17000 }, { cap: '512GB', price: 18000 }] },
-    { id: 'ip16', name: 'iPhone 16', colors: colorSets.base16, capacities: [{ cap: '128GB', price: 13500 }, { cap: '256GB', price: 15000 }, { cap: '512GB', price: 16500 }] },
-    { id: 'ip15pm', name: 'iPhone 15 Pro Max', colors: colorSets.pro15, capacities: [{ cap: '256GB', price: 17000 }, { cap: '512GB', price: 18000 }, { cap: '1TB', price: 20000 }] },
-    { id: 'ip15p', name: 'iPhone 15 Pro', colors: colorSets.pro15, capacities: [{ cap: '128GB', price: 13000 }, { cap: '256GB', price: 15000 }, { cap: '512GB', price: 16000 }, { cap: '1TB', price: 17000 }] },
-    { id: 'ip15pl', name: 'iPhone 15 Plus', colors: colorSets.base15, capacities: [{ cap: '128GB', price: 12000 }, { cap: '256GB', price: 13000 }, { cap: '512GB', price: 14000 }] },
-    { id: 'ip15', name: 'iPhone 15', colors: colorSets.base15, capacities: [{ cap: '128GB', price: 11000 }, { cap: '256GB', price: 12000 }, { cap: '512GB', price: 13000 }] },
-    { id: 'ip14pm', name: 'iPhone 14 Pro Max', colors: colorSets.pro14, capacities: [{ cap: '128GB', price: 10000 }, { cap: '256GB', price: 12000 }, { cap: '512GB', price: 12000 }, { cap: '1TB', price: 13000 }] },
-    { id: 'ip14p', name: 'iPhone 14 Pro', colors: colorSets.pro14, capacities: [{ cap: '128GB', price: 8000 }, { cap: '256GB', price: 11000 }, { cap: '512GB', price: 10000 }, { cap: '1TB', price: 10500 }] },
-    { id: 'ip14pl', name: 'iPhone 14 Plus', colors: colorSets.base14, capacities: [{ cap: '128GB', price: 7000 }, { cap: '256GB', price: 8000 }, { cap: '512GB', price: 9000 }] },
-    { id: 'ip14', name: 'iPhone 14', colors: colorSets.base14, capacities: [{ cap: '128GB', price: 6000 }, { cap: '256GB', price: 7000 }, { cap: '512GB', price: 8000 }] },
-    { id: 'ip13pm', name: 'iPhone 13 Pro Max', colors: colorSets.pro13, capacities: [{ cap: '128GB', price: 8500 }, { cap: '256GB', price: 9500 }, { cap: '512GB', price: 10500 }, { cap: '1TB', price: 11000 }] },
-    { id: 'ip13p', name: 'iPhone 13 Pro', colors: colorSets.pro13, capacities: [{ cap: '128GB', price: 7000 }, { cap: '256GB', price: 8000 }, { cap: '512GB', price: 9000 }, { cap: '1TB', price: 9500 }] },
-    { id: 'ip13', name: 'iPhone 13', colors: colorSets.base13, capacities: [{ cap: '128GB', price: 5000 }, { cap: '256GB', price: 6000 }, { cap: '512GB', price: 6500 }] },
-    { id: 'ip13m', name: 'iPhone 13 mini', colors: colorSets.base13, capacities: [{ cap: '128GB', price: 4000 }, { cap: '256GB', price: 4500 }, { cap: '512GB', price: 5000 }] },
-    { id: 'ip12pm', name: 'iPhone 12 Pro Max', colors: colorSets.pro12, capacities: [{ cap: '128GB', price: 6000 }, { cap: '256GB', price: 6500 }, { cap: '512GB', price: 7000 }] },
-    { id: 'ip12p', name: 'iPhone 12 Pro', colors: colorSets.pro12, capacities: [{ cap: '128GB', price: 4500 }, { cap: '256GB', price: 5000 }, { cap: '512GB', price: 5500 }] },
-    { id: 'ip12', name: 'iPhone 12', colors: colorSets.base12, capacities: [{ cap: '64GB', price: 3500 }, { cap: '128GB', price: 4000 }, { cap: '256GB', price: 4500 }] },
-    { id: 'ip12m', name: 'iPhone 12 mini', colors: colorSets.base12, capacities: [{ cap: '64GB', price: 3000 }, { cap: '128GB', price: 3200 }, { cap: '256GB', price: 3500 }] },
-    { id: 'ip11pm', name: 'iPhone 11 Pro Max', colors: colorSets.pro11, capacities: [{ cap: '64GB', price: 3000 }, { cap: '256GB', price: 3200 }, { cap: '512GB', price: 3500 }] },
-    { id: 'ip11p', name: 'iPhone 11 Pro', colors: colorSets.pro11, capacities: [{ cap: '64GB', price: 2500 }, { cap: '256GB', price: 2700 }, { cap: '512GB', price: 3000 }] },
-    { id: 'ip11', name: 'iPhone 11', colors: colorSets.base11, capacities: [{ cap: '64GB', price: 2000 }, { cap: '128GB', price: 2200 }, { cap: '256GB', price: 2500 }] }
-]
+                'iphone': [
+                    // --- ⬇️ iPhone 價格修改區 (15 Pro 以上已包含基準+500調整) ⬇️ ---
+                    { id: 'ip17pm', name: 'iPhone 17 Pro Max', colors: colorSets.pro17, capacities: [{ cap: '256GB', price: 31500 }, { cap: '512GB', price: 35000 }, { cap: '1TB', price: 38500 }, { cap: '2TB', price: 47500 }] },
+                    { id: 'ip17p', name: 'iPhone 17 Pro', colors: colorSets.pro17, capacities: [{ cap: '256GB', price: 27500 }, { cap: '512GB', price: 31500 }, { cap: '1TB', price: 35500 }] },
+                    { id: 'ip17', name: 'iPhone 17', colors: colorSets.base17, capacities: [{ cap: '256GB', price: 19500 }, { cap: '512GB', price: 23500 }] },
+                    { id: 'ip16pm', name: 'iPhone 16 Pro Max', colors: colorSets.pro16, capacities: [{ cap: '256GB', price: 25000 }, { cap: '512GB', price: 25500 }, { cap: '1TB', price: 26500 }] },
+                    { id: 'ip16p', name: 'iPhone 16 Pro', colors: colorSets.pro16, capacities: [{ cap: '128GB', price: 17500 }, { cap: '256GB', price: 19500 }, { cap: '512GB', price: 21500 }, { cap: '1TB', price: 24500 }] },
+                    { id: 'ip16pl', name: 'iPhone 16 Plus', colors: colorSets.base16, capacities: [{ cap: '128GB', price: 14500 }, { cap: '256GB', price: 15500 }, { cap: '512GB', price: 18500 }] },
+                    { id: 'ip16', name: 'iPhone 16', colors: colorSets.base16, capacities: [{ cap: '128GB', price: 13000 }, { cap: '256GB', price: 15000 }, { cap: '512GB', price: 16500 }] },
+                    { id: 'ip15pm', name: 'iPhone 15 Pro Max', colors: colorSets.pro15, capacities: [{ cap: '256GB', price: 16500 }, { cap: '512GB', price: 18500 }, { cap: '1TB', price: 20500 }] },
+                    { id: 'ip15p', name: 'iPhone 15 Pro', colors: colorSets.pro15, capacities: [{ cap: '128GB', price: 12500 }, { cap: '256GB', price: 13500 }, { cap: '512GB', price: 15500 }, { cap: '1TB', price: 16500 }] },
+                    { id: 'ip15pl', name: 'iPhone 15 Plus', colors: colorSets.base15, capacities: [{ cap: '128GB', price: 10000 }, { cap: '256GB', price: 11500 }, { cap: '512GB', price: 13000 }] },
+                    { id: 'ip15', name: 'iPhone 15', colors: colorSets.base15, capacities: [{ cap: '128GB', price: 9500 }, { cap: '256GB', price: 10500 }, { cap: '512GB', price: 12000 }] },
+                    { id: 'ip14pm', name: 'iPhone 14 Pro Max', colors: colorSets.pro14, capacities: [{ cap: '128GB', price: 10000 }, { cap: '256GB', price: 11000 }, { cap: '512GB', price: 12500 }, { cap: '1TB', price: 14500 }] },
+                    { id: 'ip14p', name: 'iPhone 14 Pro', colors: colorSets.pro14, capacities: [{ cap: '128GB', price: 8500 }, { cap: '256GB', price: 9500 }, { cap: '512GB', price: 10500 }, { cap: '1TB', price: 11500 }] },
+                    { id: 'ip14pl', name: 'iPhone 14 Plus', colors: colorSets.base14, capacities: [{ cap: '128GB', price: 6500 }, { cap: '256GB', price: 7500 }, { cap: '512GB', price: 8000 }] },
+                    { id: 'ip14', name: 'iPhone 14', colors: colorSets.base14, capacities: [{ cap: '128GB', price: 6000 }, { cap: '256GB', price: 6500 }, { cap: '512GB', price: 7500 }] },
+                    { id: 'ip13pm', name: 'iPhone 13 Pro Max', colors: colorSets.pro13, capacities: [{ cap: '128GB', price: 7000 }, { cap: '256GB', price: 8000 }, { cap: '512GB', price: 9000 }, { cap: '1TB', price: 10000 }] },
+                    { id: 'ip13p', name: 'iPhone 13 Pro', colors: colorSets.pro13, capacities: [{ cap: '128GB', price: 5000 }, { cap: '256GB', price: 5500 }, { cap: '512GB', price: 6000 }, { cap: '1TB', price: 7000 }] },
+                    { id: 'ip13', name: 'iPhone 13', colors: colorSets.base13, capacities: [{ cap: '128GB', price: 4000 }, { cap: '256GB', price: 4500 }, { cap: '512GB', price: 5000 }] },
+                    { id: 'ip13m', name: 'iPhone 13 mini', colors: colorSets.base13, capacities: [{ cap: '128GB', price: 4000 }, { cap: '256GB', price: 4500 }, { cap: '512GB', price: 5000 }] },
+                    { id: 'ip12pm', name: 'iPhone 12 Pro Max', colors: colorSets.pro12, capacities: [{ cap: '128GB', price: 6000 }, { cap: '256GB', price: 7500 }, { cap: '512GB', price: 8000 }] },
+                    { id: 'ip12p', name: 'iPhone 12 Pro', colors: colorSets.pro12, capacities: [{ cap: '128GB', price: 4500 }, { cap: '256GB', price: 5000 }, { cap: '512GB', price: 5500 }] },
+                    { id: 'ip12', name: 'iPhone 12', colors: colorSets.base12, capacities: [{ cap: '64GB', price: 3200 }, { cap: '128GB', price: 3800 }, { cap: '256GB', price: 4000 }] },
+                    { id: 'ip12m', name: 'iPhone 12 mini', colors: colorSets.base12, capacities: [{ cap: '64GB', price: 2500 }, { cap: '128GB', price: 3000 }, { cap: '256GB', price: 3200 }] },
+                    { id: 'ip11pm', name: 'iPhone 11 Pro Max', colors: colorSets.pro11, capacities: [{ cap: '64GB', price: 3500 }, { cap: '256GB', price: 4000 }, { cap: '512GB', price: 4500 }] },
+                    { id: 'ip11p', name: 'iPhone 11 Pro', colors: colorSets.pro11, capacities: [{ cap: '64GB', price: 3000 }, { cap: '256GB', price: 4000 }, { cap: '512GB', price: 4200 }] },
+                    { id: 'ip11', name: 'iPhone 11', colors: colorSets.base11, capacities: [{ cap: '64GB', price: 2300 }, { cap: '128GB', price: 2500 }, { cap: '256GB', price: 2800 }] }
+                ],
+                'ipad': [
+                    // --- ⬇️ iPad 價格修改區 ⬇️ ---
+                    { id: 'ipad_prom4_13', name: 'iPad Pro (M4) 13吋', colors: colorSets.ipadProM4, capacities: [{ cap: '256GB', price: 32000 }, { cap: '512GB', price: 36000 }, { cap: '1TB', price: 42000 }] },
+                    { id: 'ipad_prom4_11', name: 'iPad Pro (M4) 11吋', colors: colorSets.ipadProM4, capacities: [{ cap: '256GB', price: 25000 }, { cap: '512GB', price: 29000 }, { cap: '1TB', price: 35000 }] },
+                    { id: 'ipad_prom2_129', name: 'iPad Pro (M2) 12.9吋', colors: colorSets.ipadProM2, capacities: [{ cap: '128GB', price: 19000 }, { cap: '256GB', price: 21000 }, { cap: '512GB', price: 24000 }] },
+                    { id: 'ipad_prom2_11', name: 'iPad Pro (M2) 11吋', colors: colorSets.ipadProM2, capacities: [{ cap: '128GB', price: 16000 }, { cap: '256GB', price: 18000 }, { cap: '512GB', price: 21000 }] },
+                    { id: 'ipad_airm2_13', name: 'iPad Air (M2) 13吋', colors: colorSets.ipadAirM2, capacities: [{ cap: '128GB', price: 18000 }, { cap: '256GB', price: 20000 }, { cap: '512GB', price: 24000 }] },
+                    { id: 'ipad_airm2_11', name: 'iPad Air (M2) 11吋', colors: colorSets.ipadAirM2, capacities: [{ cap: '128GB', price: 13000 }, { cap: '256GB', price: 15000 }, { cap: '512GB', price: 18000 }] },
+                    { id: 'ipad_air5', name: 'iPad Air 5', colors: colorSets.ipadAir5, capacities: [{ cap: '64GB', price: 9000 }, { cap: '256GB', price: 12000 }] },
+                    { id: 'ipad_10', name: 'iPad 10', colors: colorSets.ipad10, capacities: [{ cap: '64GB', price: 6500 }, { cap: '256GB', price: 9500 }] },
+                    { id: 'ipad_9', name: 'iPad 9', colors: colorSets.ipad9, capacities: [{ cap: '64GB', price: 4500 }, { cap: '256GB', price: 6500 }] },
+                    { id: 'ipad_mini', name: 'iPad mini', colors: colorSets.ipadmini, capacities: [{ cap: '64GB', price: 8500 }, { cap: '256GB', price: 11000 }] }
+                ]
             }
         };
 
-        let database = JSON.parse(localStorage.getItem('star_fruit_database')) || defaultDatabase;
+        // 直接使用設定檔，移除 localStorage 快取，確保修改程式碼後能直接反映最新價格
+        let database = defaultDatabase;
 
         let currentState = {
             brand: null,
@@ -804,9 +784,9 @@
             const today = new Date();
             document.getElementById('update-date-display').textContent = '報價更新日期：' + today.getFullYear() + '年' + (today.getMonth() + 1) + '月' + today.getDate() + '日';
             
-            const appleBtn = brandContainer.querySelector('button');
-            if (appleBtn) {
-                appleBtn.click();
+            const iphoneBtn = brandContainer.querySelector('button');
+            if (iphoneBtn) {
+                iphoneBtn.click();
             }
         }
 
@@ -814,10 +794,10 @@
             brandContainer.innerHTML = '';
             database.brands.forEach(brand => {
                 const btn = document.createElement('button');
-                btn.className = 'flex flex-col items-center justify-center p-4 border-2 border-slate-200 rounded-xl hover:border-primary hover:bg-blue-50 transition-colors group focus:outline-none';
+                btn.className = 'flex flex-col items-center justify-center p-3 sm:p-4 border-2 border-slate-200 rounded-xl hover:border-primary hover:bg-blue-50 transition-colors group focus:outline-none';
                 btn.innerHTML = `
-                    <i class="fa-brands ${brand.icon} text-2xl text-slate-400 group-hover:text-primary transition-colors mb-2"></i>
-                    <span class="text-sm font-bold text-slate-600 group-hover:text-primary transition-colors">${brand.name}</span>
+                    <i class="fa-solid ${brand.icon} text-xl sm:text-2xl text-slate-400 group-hover:text-primary transition-colors mb-1 sm:mb-2"></i>
+                    <span class="text-xs sm:text-sm font-bold text-slate-600 group-hover:text-primary transition-colors">${brand.name}</span>
                 `;
                 btn.onclick = () => selectBrand(brand.id, btn);
                 brandContainer.appendChild(btn);
@@ -849,7 +829,7 @@
 
         function renderModels(brandId) {
             const models = database.models[brandId] || [];
-            modelSelect.innerHTML = '<option value="">請選擇手機型號...</option>';
+            modelSelect.innerHTML = '<option value="">請選擇型號...</option>';
             models.forEach(model => {
                 const option = document.createElement('option');
                 option.value = model.id;
@@ -890,7 +870,7 @@
             container.innerHTML = '';
             colors.forEach(color => {
                 const btn = document.createElement('button');
-                btn.className = 'py-2 px-2 text-sm font-bold border-2 border-slate-200 rounded-xl hover:border-primary hover:text-primary transition-colors focus:outline-none text-slate-600';
+                btn.className = 'py-2 px-1 sm:px-2 text-xs sm:text-sm font-bold border-2 border-slate-200 rounded-xl hover:border-primary hover:text-primary transition-colors focus:outline-none text-slate-600 truncate';
                 btn.textContent = color;
                 btn.onclick = () => selectColor(color, btn);
                 container.appendChild(btn);
@@ -921,7 +901,7 @@
             capacityContainer.innerHTML = '';
             capacities.forEach((capData) => {
                 const btn = document.createElement('button');
-                btn.className = 'py-3 px-2 text-sm font-bold border-2 border-slate-200 rounded-xl hover:border-primary hover:text-primary transition-colors focus:outline-none text-slate-600';
+                btn.className = 'py-2 sm:py-3 px-1 sm:px-2 text-sm font-bold border-2 border-slate-200 rounded-xl hover:border-primary hover:text-primary transition-colors focus:outline-none text-slate-600';
                 btn.textContent = capData.cap;
                 btn.onclick = () => selectCapacity(capData, btn);
                 capacityContainer.appendChild(btn);
@@ -1012,7 +992,6 @@
             const brandData = database.brands.find(b => b.id === currentState.brand);
             const modelData = database.models[currentState.brand].find(m => m.id === currentState.model);
 
-            // 直接從最新 database 抓取基準價格，確保後台修改後右側會即時變動
             let base = currentState.basePrice;
             if (currentState.brand && currentState.model && currentState.capacity) {
                 const modelObj = database.models[currentState.brand].find(m => m.id === currentState.model);
@@ -1119,85 +1098,6 @@
             void finalPriceEl.offsetWidth; 
             finalPriceEl.textContent = formatPrice(finalPrice);
             finalPriceEl.classList.add('price-animate');
-        }
-
-        // ================= 密碼驗證與價格管理後台 =================
-        function requestPassword() {
-            const password = prompt("請輸入管理者金鑰（密碼）：");
-            if (password === null) return;
-
-            if (password === ADMIN_PASSWORD) {
-                openPriceManager();
-            } else {
-                alert("❌ 密碼錯誤，拒絕存取！");
-            }
-        }
-
-        function openPriceManager() {
-            const listContainer = document.getElementById('price-editor-list');
-            listContainer.innerHTML = '';
-
-            database.models['apple'].forEach((model, modelIdx) => {
-                let modelHtml = `<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <div class="font-bold text-slate-800 mb-3 flex items-center justify-between">
-                        <span>${model.name}</span>
-                        <span class="text-xs text-slate-400 font-normal">型號代碼: ${model.id}</span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">`;
-
-                model.capacities.forEach((cap, capIdx) => {
-                    modelHtml += `<div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1">${cap.cap}</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-xs text-slate-400">NT$</span>
-                            <input type="number" data-model-idx="${modelIdx}" data-cap-idx="${capIdx}" value="${cap.price}" class="price-input w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-bold text-slate-700 focus:bg-white focus:ring-1 focus:ring-primary focus:outline-none">
-                        </div>
-                    </div>`;
-                });
-
-                modelHtml += `</div></div>`;
-                listContainer.innerHTML += modelHtml;
-            });
-
-            openModal('price-manager-modal');
-        }
-
-        function closePriceManager() {
-            closeModal('price-manager-modal');
-        }
-
-        function savePrices() {
-            const inputs = document.querySelectorAll('.price-input');
-            inputs.forEach(input => {
-                const modelIdx = parseInt(input.dataset.modelIdx);
-                const capIdx = parseInt(input.dataset.capIdx);
-                const newVal = parseInt(input.value);
-                if (!isNaN(newVal)) {
-                    database.models['apple'][modelIdx].capacities[capIdx].price = newVal;
-                }
-            });
-
-            localStorage.setItem('star_fruit_database', JSON.stringify(database));
-            
-            closePriceManager();
-            alert('✅ 回收價格已成功更新！畫面估價已同步調整。');
-            
-            // 儲存後若右側正顯示估價，立即重新整理計算結果
-            if (currentState.model && currentState.capacity) {
-                updateResult();
-            }
-        }
-
-        function resetDefaultPrices() {
-            if (confirm('確定要將所有價格還原為預設值嗎？')) {
-                localStorage.removeItem('star_fruit_database');
-                database = JSON.parse(JSON.stringify(defaultDatabase));
-                openPriceManager();
-                if (currentState.model && currentState.capacity) {
-                    updateResult();
-                }
-                alert('已還原為預設價格！');
-            }
         }
 
         function initCarousel() {
