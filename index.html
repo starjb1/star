@@ -738,11 +738,11 @@
                     { id: 'ip17p', name: 'iPhone 17 Pro', colors: colorSets.pro17, series: '17', capacities: [{ cap: '256GB', price: 27500 }, { cap: '512GB', price: 31500 }, { cap: '1TB', price: 35500 }] },
                     { id: 'ip17', name: 'iPhone 17', colors: colorSets.base17, series: '17', capacities: [{ cap: '256GB', price: 19500 }, { cap: '512GB', price: 23500 }] },
                     
-                    // iPhone 16 系列 (+500)
-                    { id: 'ip16pm', name: 'iPhone 16 Pro Max', colors: colorSets.pro16, series: '16', capacities: [{ cap: '256GB', price: 25000 }, { cap: '512GB', price: 25500 }, { cap: '1TB', price: 26500 }] },
-                    { id: 'ip16p', name: 'iPhone 16 Pro', colors: colorSets.pro16, series: '16', capacities: [{ cap: '128GB', price: 17500 }, { cap: '256GB', price: 19500 }, { cap: '512GB', price: 21500 }, { cap: '1TB', price: 24500 }] },
-                    { id: 'ip16pl', name: 'iPhone 16 Plus', colors: colorSets.base16, series: '16', capacities: [{ cap: '128GB', price: 14500 }, { cap: '256GB', price: 15500 }, { cap: '512GB', price: 18500 }] },
-                    { id: 'ip16', name: 'iPhone 16', colors: colorSets.base16, series: '16', capacities: [{ cap: '128GB', price: 13000 }, { cap: '256GB', price: 15000 }, { cap: '512GB', price: 16500 }] },
+                    // iPhone 16 系列 (下調 1000)
+                    { id: 'ip16pm', name: 'iPhone 16 Pro Max', colors: colorSets.pro16, series: '16', capacities: [{ cap: '256GB', price: 24000 }, { cap: '512GB', price: 24500 }, { cap: '1TB', price: 25500 }] },
+                    { id: 'ip16p', name: 'iPhone 16 Pro', colors: colorSets.pro16, series: '16', capacities: [{ cap: '128GB', price: 16500 }, { cap: '256GB', price: 18500 }, { cap: '512GB', price: 20500 }, { cap: '1TB', price: 23500 }] },
+                    { id: 'ip16pl', name: 'iPhone 16 Plus', colors: colorSets.base16, series: '16', capacities: [{ cap: '128GB', price: 13500 }, { cap: '256GB', price: 14500 }, { cap: '512GB', price: 17500 }] },
+                    { id: 'ip16', name: 'iPhone 16', colors: colorSets.base16, series: '16', capacities: [{ cap: '128GB', price: 12000 }, { cap: '256GB', price: 14000 }, { cap: '512GB', price: 15500 }] },
                     
                     // iPhone 15 系列 (Pro以上 +500)
                     { id: 'ip15pm', name: 'iPhone 15 Pro Max', colors: colorSets.pro15, series: '15', capacities: [{ cap: '256GB', price: 16500 }, { cap: '512GB', price: 18500 }, { cap: '1TB', price: 20500 }] },
@@ -1076,14 +1076,31 @@
             // 電池細分計算
             let batLoss = 0;
             let batBonus = 0;
+            
+            // 判斷是否為 16/17 Pro 或 Pro Max 機型
+            const highEndModels = ['ip16p', 'ip16pm', 'ip17p', 'ip17pm'];
+            const isHighEndPro = highEndModels.includes(currentState.model);
+
             if (currentState.batteryStatus === '95') {
                 batBonus = base >= 15000 ? 500 : 300;
             } else if (currentState.batteryStatus === '85') {
-                batLoss = Math.max(Math.round((base * 0.05) / 100) * 100, 500);
+                if (isHighEndPro) {
+                    batLoss = 2000;
+                } else {
+                    batLoss = Math.max(Math.round((base * 0.05) / 100) * 100, 500);
+                }
             } else if (currentState.batteryStatus === '80') {
-                batLoss = Math.max(Math.round((base * 0.08) / 100) * 100, 1000);
+                if (isHighEndPro) {
+                    batLoss = 3000;
+                } else {
+                    batLoss = Math.max(Math.round((base * 0.08) / 100) * 100, 1000);
+                }
             } else if (currentState.batteryStatus === 'bad') {
-                batLoss = Math.max(Math.round((base * 0.12) / 100) * 100, 1500);
+                if (isHighEndPro) {
+                    batLoss = 4000;
+                } else {
+                    batLoss = Math.max(Math.round((base * 0.12) / 100) * 100, 1500);
+                }
             }
 
             // 保固加碼
@@ -1119,6 +1136,97 @@
             if (bodyLoss > 0) {
                 bodyDeductionRow.classList.remove('hidden');
                 bodyDeduction.textContent = '- ' + formatPrice(Math.round(bodyLoss));
+            } else {
+                bodyDeductionRow.classList.add('hidden');
+            }
+
+            if (funcLoss > 0) {
+                funcDeductionRow.classList.remove('hidden');
+                funcDeduction.textContent = '- ' + formatPrice(funcLoss);
+            } else {
+                funcDeductionRow.classList.add('hidden');
+            }
+            
+            if (batLoss > 0) {
+                batteryDeductionRow.classList.remove('hidden');
+                batteryDeduction.textContent = '- ' + formatPrice(batLoss);
+            } else {
+                batteryDeductionRow.classList.add('hidden');
+            }
+
+            if (boxLoss > 0) {
+                boxDeductionRow.classList.remove('hidden');
+                boxDeduction.textContent = '- ' + formatPrice(boxLoss);
+            } else {
+                boxDeductionRow.classList.add('hidden');
+            }
+
+            let finalPrice = base + batBonus + warBonus - screenLoss - bodyLoss - funcLoss - batLoss - boxLoss;
+            finalPrice = Math.max(0, finalPrice);
+
+            let appleEstimatedPrice = Math.floor((base * 0.92) / 100) * 100;
+            let difference = finalPrice - appleEstimatedPrice;
+
+            if (difference > 0 && finalPrice > 0) {
+                appleCompareBox.classList.remove('hidden');
+                applePriceDisplay.textContent = formatPrice(appleEstimatedPrice);
+                extraEarnDisplay.textContent = formatPrice(difference);
+            } else {
+                appleCompareBox.classList.add('hidden');
+            }
+
+            finalPriceEl.classList.remove('price-animate');
+            void finalPriceEl.offsetWidth; 
+            finalPriceEl.textContent = formatPrice(finalPrice);
+            finalPriceEl.classList.add('price-animate');
+        }
+
+        function initCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.remove('opacity-0');
+                        slide.classList.add('opacity-100');
+                        slide.style.zIndex = '10';
+                        if(dots[i]) dots[i].classList.add('bg-white');
+                        if(dots[i]) dots[i].classList.remove('bg-white/40');
+                    } else {
+                        slide.classList.add('opacity-0');
+                        slide.classList.remove('opacity-100');
+                        slide.style.zIndex = '0';
+                        if(dots[i]) dots[i].classList.remove('bg-white');
+                        if(dots[i]) dots[i].classList.add('bg-white/40');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(slideInterval);
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                    slideInterval = setInterval(nextSlide, 4000);
+                });
+            });
+
+            showSlide(0);
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html> bodyDeduction.textContent = '- ' + formatPrice(Math.round(bodyLoss));
             } else {
                 bodyDeductionRow.classList.add('hidden');
             }
