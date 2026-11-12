@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- iOS Web App 專屬設定：加入主畫面全螢幕與圖示 -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="星果科技估價">
-    <link rel="apple-touch-icon" href="logo.jpg">
-    
     <meta property="og:type" content="website">
     <meta property="og:title" content="星果科技 | 星果科技估價單 - 二手手機回收價格">
     <meta property="og:description" content="全台大數據即時行情，保證無隱藏扣款。最高預估收購價馬上算！舊機貼換新機，享最高 NT$ 1,500 額外折扣。">
@@ -21,7 +15,7 @@
     <meta name="twitter:description" content="全台大數據即時行情，保證無隱藏扣款。最高預估收購價馬上算！">
     <meta name="twitter:image" content="https://starjb1.github.io/star/logo.jpg">
 
-    <title>3C智能估價大廳 | 二手手機即時回收價格</title>
+    <title> 星果科技 | 二手手機即時回收價格</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -575,7 +569,7 @@
         </div>
     </div>
 
-    <!-- 常見問題 FAQ Modal -->
+    <!-- 常見問題 FAQ Modal (附帶 1234 標註及客製化文字) -->
     <div id="faq-modal" class="fixed inset-0 z-[100] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal('faq-modal')"></div>
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
@@ -740,9 +734,9 @@
             models: {
                 'iphone': [
                     // iPhone 17 系列 (+500)
-                    { id: 'ip17pm', name: 'iPhone 17 Pro Max', colors: colorSets.pro17, series: '17', capacities: [{ cap: '256GB', price: 31500 }, { cap: '512GB', price: 35000 }, { cap: '1TB', price: 38500 }] },
-                    { id: 'ip17p', name: 'iPhone 17 Pro', colors: colorSets.pro17, series: '17', capacities: [{ cap: '256GB', price: 27500 }, { cap: '512GB', price: 31500 }, { cap: '1TB', price: 35500 }] },
-                    { id: 'ip17', name: 'iPhone 17', colors: colorSets.base17, series: '17', capacities: [{ cap: '256GB', price: 19500 }, { cap: '512GB', price: 23500 }] },
+                    { id: 'ip17pm', name: 'iPhone 17 Pro Max', colors: colorSets.pro17, series: '17', capacities: [{ cap: '256GB', price: 30000 }, { cap: '512GB', price: 33500 }, { cap: '1TB', price: 37500 }, { cap: '2TB', price: 46000 }] },
+                    { id: 'ip17p', name: 'iPhone 17 Pro', colors: colorSets.pro17, series: '17', capacities: [{ cap: '256GB', price: 26500 }, { cap: '512GB', price: 30500 }, { cap: '1TB', price: 34000 }] },
+                    { id: 'ip17', name: 'iPhone 17', colors: colorSets.base17, series: '17', capacities: [{ cap: '256GB', price: 19000 }, { cap: '512GB', price: 23000 }] },
                     
                     // iPhone 16 系列 (下調 1000)
                     { id: 'ip16pm', name: 'iPhone 16 Pro Max', colors: colorSets.pro16, series: '16', capacities: [{ cap: '256GB', price: 24000 }, { cap: '512GB', price: 24500 }, { cap: '1TB', price: 25500 }] },
